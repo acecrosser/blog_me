@@ -31,7 +31,7 @@ class BlogPost(models.Model):
 class BlogRubric(models.Model):
 
     rubric_name = models.CharField(max_length=150, db_index=True, verbose_name='Рубрика')
-    slug = models.SlugField(max_length=150, unique=True)
+    slug = models.SlugField(max_length=150)
 
     def __str__(self):
         return self.rubric_name

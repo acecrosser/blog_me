@@ -1,7 +1,7 @@
 {% for post in posts %}
-    {{ post.title }} <br>
+    <a href="{% url 'blog:detail' post.rubric_name.slug post.slug %}">{{ post.title }} </a> <br>
     {{ post.update|date }} <br>
     {{ post.body|truncatewords:'100' }} <br>
-    {{ post.rubric_name }} <br>
+    <a href="{% url 'blog:rubric' post.rubric_name.slug %}"> {{ post.rubric_name }}</a> <br>
     {{ post.author }} <br><br>
 {% endfor %}
