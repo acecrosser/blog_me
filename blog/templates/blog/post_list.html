@@ -1,5 +1,7 @@
 {% for post in posts %}
     {{ post.title }} <br>
-    {{ post.body }} <br>
+    {{ post.update|date }} <br>
+    {{ post.body|truncatewords:'100' }} <br>
+    {{ post.rubric_name }} <br>
     {{ post.author }} <br><br>
 {% endfor %}
