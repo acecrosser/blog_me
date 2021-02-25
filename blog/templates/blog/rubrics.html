@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% for post in posts %}
+    <a href="{% url 'blog:rubric' post.slug %}"> {{ post.rubric_name }} </a><br>
+    {% endfor %}
+
+{% endblock %}

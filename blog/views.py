@@ -36,3 +36,10 @@ class RubricPage(ListView):
         context['rubrics'] = BlogRubric.objects.all()
         context['current_rubrics'] = BlogRubric.objects.get(pk=slug.id)
         return context
+
+
+class RubricIndexPage(ListView):
+
+    template_name = 'blog/rubrics.html'
+    context_object_name = 'posts'
+    queryset = BlogRubric.objects.filter()

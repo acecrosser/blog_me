@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+<ul class="menu">
+    <li><a href="{% url 'blog:index_page' %}">Главная</a></li>
+    <li><a href="{% url 'blog:rub' %}">Рубрики</a></li>
+</ul>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 from py_dotenv import read_dotenv
 
-dotenv_path = os.path.abspath('..\\blog_me\\' + '.env')
+dotenv_path = os.path.abspath('.env')
 read_dotenv(dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
