@@ -13,7 +13,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     create = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
-    tag = TaggableManager()
+    tags = TaggableManager()
 
     # def save(self, *args, **kwargs):
     #     self.slug = slugify(self.title)

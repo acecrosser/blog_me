@@ -1,6 +1,7 @@
-from django.shortcuts import render, HttpResponse
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, HttpResponse, redirect
+from django.views.generic import ListView, DetailView, View
 from .models import BlogPost, BlogRubric
+from .forms import PostForm
 
 
 class IndexPage(ListView):
@@ -27,6 +28,7 @@ class RubricPage(ListView):
     context_object_name = 'posts'
 
     def get_queryset(self, **kwargs):
+        print(self.kwargs)
         slug = BlogRubric.objects.get(slug=self.kwargs['rubric_slug'])
         return BlogPost.objects.filter(rubric_name=slug.id)
 
@@ -43,3 +45,20 @@ class RubricIndexPage(ListView):
     template_name = 'blog/rubrics.html'
     context_object_name = 'posts'
     queryset = BlogRubric.objects.filter()
+
+
+def add_post(request):
+    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.author = request.user
+            new_post.save()
+            return redirect('blog:index_page')
+        return render(request, 'blog/add_post.html', {'form': form})
+    return render(request, 'blog/add_post.html', {'form': form})
+
+
+def edit_post(request, pk):
+    pass
