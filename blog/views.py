@@ -74,8 +74,8 @@ def add_post(request):
             post = BlogPost.objects.get(title=new_post)
             post.tags.add(request.POST['tags'])
             return redirect('blog:detail', post.rubric_name.slug, post.slug)
-        return render(request, 'blog/add_post.html', {'form': form})
-    return render(request, 'blog/add_post.html', {'form': form})
+        return render(request, 'blog/form_post.html', {'form': form})
+    return render(request, 'blog/form_post.html', {'form': form})
 
 
 def edit_post(request, slug):
@@ -85,6 +85,6 @@ def edit_post(request, slug):
         if form.is_valid():
             form.save()
             return redirect('blog:detail', post.rubric_name.slug, post.slug)
-        return render(request, 'blog/add_post.html', {'form': form})
+        return render(request, 'blog/form_post.html', {'form': form})
     form = PostForm(instance=post)
-    return render(request, 'blog/add_post.html', {'form': form})
+    return render(request, 'blog/form_post.html', {'form': form})
