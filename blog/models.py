@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
-from django.utils.text import slugify
+# from django.utils.text import slugify
+from pytils.translit import slugify
 
 
 class BlogPost(models.Model):
@@ -15,14 +16,14 @@ class BlogPost(models.Model):
     update = models.DateTimeField(auto_now=True)
     tags = TaggableManager()
 
-    # def save(self, *args, **kwargs):
-    #     self.slug = slugify(self.title)
-    #     super(BlogPost, self).save(self, *args, **kwargs)
-
     class Meta:
         ordering = ('-create', )
         verbose_name = 'Запись'
         verbose_name_plural = 'Записи'
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(BlogPost, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title

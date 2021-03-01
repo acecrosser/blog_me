@@ -7,7 +7,7 @@ class PostForm(ModelForm):
 
     class Meta:
         model = BlogPost
-        fields = ('title', 'body', 'tags', 'rubric_name', 'slug')
+        fields = ('title', 'body', 'tags', 'rubric_name',)
         labels = {
             'title': 'Заголовок записи',
             'body': 'Текст записи'
