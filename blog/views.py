@@ -7,15 +7,17 @@ from django.utils.text import slugify
 
 class IndexPage(ListView):
 
+    paginate_by = 3
+    model = BlogPost
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
-    queryset = BlogPost.objects.filter()
 
 
 class DetailPost(DetailView):
 
     model = BlogPost
     template_name = 'blog/post.html'
+    context_object_name = 'post'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -25,6 +27,7 @@ class DetailPost(DetailView):
 
 class TagPosts(ListView):
 
+    paginate_by = 3
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
 
@@ -36,6 +39,7 @@ class TagPosts(ListView):
 
 class RubricPage(ListView):
 
+    paginate_by = 3
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
 
@@ -53,6 +57,7 @@ class RubricPage(ListView):
 
 class RubricIndexPage(ListView):
 
+    paginate_by = 3
     template_name = 'blog/rubrics.html'
     context_object_name = 'posts'
     queryset = BlogRubric.objects.filter()
@@ -68,13 +73,18 @@ def add_post(request):
             new_post.save()
             post = BlogPost.objects.get(title=new_post)
             post.tags.add(request.POST['tags'])
-            # slug = slugify(post.title)
-            # print(slug)
-            # post.slug = slug
-            return redirect('blog:index_page')
+            return redirect('blog:detail', post.rubric_name.slug, post.slug)
         return render(request, 'blog/add_post.html', {'form': form})
     return render(request, 'blog/add_post.html', {'form': form})
 
 
-def edit_post(request, pk):
-    pass
+def edit_post(request, slug):
+    post = BlogPost.objects.get(slug=slug)
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('blog:detail', post.rubric_name.slug, post.slug)
+        return render(request, 'blog/add_post.html', {'form': form})
+    form = PostForm(instance=post)
+    return render(request, 'blog/add_post.html', {'form': form})

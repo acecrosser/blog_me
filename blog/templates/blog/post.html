@@ -2,10 +2,12 @@
 
 {% block content %}
 
-    {{ blogpost.title }} <br>
-    {{ blogpost.update|date }} <br>
-    {{ blogpost.body }} <br>
-    {{ blogpost.rubric_name }} <br>
-    {{ blogpost.author }} <br><br>
+    {{ post.title }} <br>
+    {{ post.update|date }} <br>
+    {{ post.body }} <br>
+    {{ post.rubric_name }} <br>
+    {{ post.author }} <br><br>
+
+    <a href="{% url 'blog:edit_post' post.slug %}">Редактировать</a>
 
 {% endblock %}
