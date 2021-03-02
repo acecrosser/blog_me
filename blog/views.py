@@ -57,7 +57,6 @@ class RubricPage(ListView):
 
 class RubricIndexPage(ListView):
 
-    paginate_by = 3
     template_name = 'blog/rubrics.html'
     context_object_name = 'posts'
     queryset = BlogRubric.objects.filter()
