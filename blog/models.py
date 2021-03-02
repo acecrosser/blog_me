@@ -43,4 +43,9 @@ class BlogRubric(models.Model):
         verbose_name_plural = 'Рубрики'
 
 
+class UserProfile(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField()
+    location = models.CharField(max_length=30, blank=True)
 
