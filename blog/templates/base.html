@@ -1,18 +1,37 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+<div class="center">
 
-<ul class="menu">
-    <li><a href="{% url 'blog:index_page' %}">Главная</a></li>
-    <li><a href="{% url 'blog:rub' %}">Рубрики</a></li>
-    <li><a href="{% url 'blog:add_post' %}">Добавить</a></li>
-</ul>
 
-{% block content %}
-{% endblock %}
+    <div class="menu">
+            <center>
+                <img src="{% static 'images/blogme.png' %}" alt="" class="logo"><br>
+                <a href="{% url 'blog:index_page' %}">Главная</a><br>
+                <a href="{% url 'blog:rub' %}">Рубрики</a><br>
+                <a href="{% url 'blog:add_post' %}">Добавить</a><br>
+            </center>
+    </div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</div>
+<div id="footer">
+    copyright * acecrosser
+</div>
 </body>
 </html>

@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load mdfilter %}
 
 {% block content %}
 
-    {{ post.title }} <br>
+    <h1>{{ post.title }}</h1>
     {{ post.update|date }} <br>
-    {{ post.body }} <br>
+    {{ post.body|markdown }} <br>
     {{ post.rubric_name }} <br>
     {{ post.author }} <br><br>
 
