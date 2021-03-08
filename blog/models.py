@@ -49,3 +49,10 @@ class UserProfile(models.Model):
     avatar = models.ImageField()
     location = models.CharField(max_length=30, blank=True)
 
+
+class PostComment(models.Model):
+
+    post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comment')
+    comment = models.TextField()
+    author = models.CharField(max_length=50)
+    create = models.DateTimeField(auto_now_add=True)

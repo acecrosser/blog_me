@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load mdfilter %}
+{% load selfilters %}
 
 {% block content %}
 
@@ -10,5 +10,20 @@
     {{ post.author }} <br><br>
 
     <a href="{% url 'blog:edit_post' post.slug %}">Редактировать</a>
+    <br><br>
 
+    {% for cmnt in comments %}
+        {{ cmnt.comment }}
+        {{ cmnt.author }}
+        {{ cmnt.create }} <br><br><br><br>
+    {% endfor %}
+
+    <form method="post">
+        <table>
+            {% csrf_token %}
+            {{ comment_form.as_table }}
+        </table>
+        <input type="submit" value="Добавить комментарий">
+    </form>
+    <br><br><br><br>
 {% endblock %}

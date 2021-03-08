@@ -1,7 +1,8 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, reverse
 from django.views.generic import ListView, DetailView, View
+from django.views.generic.edit import FormView
 from .models import BlogPost, BlogRubric
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.utils.text import slugify
 
 
@@ -13,16 +14,35 @@ class IndexPage(ListView):
     context_object_name = 'posts'
 
 
-class DetailPost(DetailView):
+class DetailPost(FormView, DetailView):
 
     model = BlogPost
+    form_class = CommentForm
     template_name = 'blog/post.html'
     context_object_name = 'post'
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super(DetailPost, self).get_context_data(**kwargs)
+        context['comment_form'] = self.get_form()
         context['slug'] = BlogPost.objects.all()
+        context['comments'] = self.object.comment.all()
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        comment = form.save(commit=False)
+        comment.post_id = self.object.pk
+        comment.save()
+        return super().form_valid(comment)
+
+    def get_success_url(self):
+        return reverse('blog:detail', kwargs={
+            'rubric_slug': self.object.rubric_name.slug,
+            'slug': self.object.slug,
+        })
 
 
 class TagPosts(ListView):
