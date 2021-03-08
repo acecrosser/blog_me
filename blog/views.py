@@ -1,9 +1,8 @@
-from django.shortcuts import render, HttpResponse, redirect, reverse
-from django.views.generic import ListView, DetailView, View
+from django.shortcuts import render, redirect, reverse
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
 from .models import BlogPost, BlogRubric
 from .forms import PostForm, CommentForm
-from django.utils.text import slugify
 
 
 class IndexPage(ListView):

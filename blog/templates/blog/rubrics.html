@@ -3,7 +3,7 @@
 {% block content %}
 
     {% for post in posts %}
-    <a href="{% url 'blog:rubric' post.slug %}"> {{ post.rubric_name }} </a><br>
+    <a href="{% url 'blog:rubric' post.slug %}"> {{ post.rubric_name }}: {{ post.post.count }}</a><br>
     {% endfor %}
 
 {% endblock %}

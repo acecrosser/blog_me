@@ -12,7 +12,7 @@
         {% endfor %}
         <br>{{ post.body|markdown|truncatewords:'100' }} <br>
         <a href="{% url 'blog:rubric' post.rubric_name.slug %}"> {{ post.rubric_name }}</a> <br>
-        {{ post.author }} <br><br>
+        {{ post.author }} - количество комментарий: {{ post.comment.count }}<br><br>
     {% endfor %}
 
     {% if page_obj.has_previous %}
