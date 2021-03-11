@@ -1,7 +1,12 @@
+import json
+
+from django.http import HttpResponse
+from django.views import View
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
-from .models import BlogPost, BlogRubric
+from .models import BlogPost, BlogRubric, LikeDislike
 from .forms import PostForm, CommentForm
 
 
@@ -79,6 +84,38 @@ class RubricIndexPage(ListView):
     template_name = 'blog/rubrics.html'
     context_object_name = 'posts'
     queryset = BlogRubric.objects.filter()
+
+
+class VoteView(View):
+    model = None
+    vote_type = None
+
+    def post(self, request, pk):
+        obj = self.model.objects.get(pk=pk)
+        try:
+            like_dislike = LikeDislike.objects.get(
+                content_type=ContentType.objects.get_for_model(obj),
+                object_id=obj.id, user=request.user)
+            if like_dislike.vote is not self.vote_type:
+                like_dislike = self.vote_type
+                like_dislike.save(update_fields=['vote'])
+                result = True
+            else:
+                like_dislike.delete()
+                result = False
+        except LikeDislike.DoesNotExist:
+            obj.votes.create(user=request.user, vote=self.vote_type)
+            result = True
+
+        return HttpResponse(
+            json.dumps({
+                "result": result,
+                "like_count": obj.votes.likes().count(),
+                "dislike_count": obj.votes.dislikes().count(),
+                "sum_rating": obj.votes.sum_rating()
+            }),
+            content_type="application/json"
+        )
 
 
 def add_post(request):

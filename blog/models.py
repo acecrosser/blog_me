@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.db.models import Sum
 from taggit.managers import TaggableManager
-# from django.utils.text import slugify
 from pytils.translit import slugify
 
 
@@ -15,6 +17,7 @@ class BlogPost(models.Model):
     create = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
     tags = TaggableManager()
+    votes = GenericRelation('LikeDislike', related_name='blogpost')
 
     class Meta:
         ordering = ('-create', )
@@ -56,3 +59,44 @@ class PostComment(models.Model):
     comment = models.TextField()
     author = models.CharField(max_length=50)
     create = models.DateTimeField(auto_now_add=True)
+    votes = GenericRelation('LikeDislike', related_name='post_comment')
+
+
+class LikeDislikeManager(models.Manager):
+
+    use_for_related_fields = True
+
+    def likes(self):
+        return self.get_queryset().filter(vote__gt=0)
+
+    def dislikes(self):
+        return self.get_queryset().filter(vote__lt=0)
+
+    def sum_rating(self):
+        return self.get_queryset().aggregate(Sum('vote')).get('vote__sum') or 0
+
+    def blogpost(self):
+        return self.get_queryset().filter(content_type__model='blogpost').order_by('-blogpost')
+
+    def post_comment(self):
+        return self.get_queryset().filter(content_type__model='post_comment').order_by('-post_comment')
+
+
+class LikeDislike(models.Model):
+
+    LIKE = 1
+    DISLIKE = -1
+
+    VOTES = {
+        (LIKE, 'Нравится'),
+        (DISLIKE, 'Не нравится')
+    }
+
+    vote = models.SmallIntegerField(verbose_name='Голос', choices=VOTES)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey()
+
+    objects = LikeDislikeManager()
