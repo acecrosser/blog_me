@@ -65,11 +65,11 @@
     <ul>
     <li data-id="{{ post.id }}" data-type="blogpost" data-action="like" title="Нравится">
         <span class="btn btn-primary">Нра</span>
-        <span data-count="like">{{ like_obj.votes.likes.count }}</span>
+        <span data-count="like">{{ post.votes.likes.count }}</span>
     </li>
     <li data-id="{{ post.id }}" data-type="blogpost" data-action="dislike" title="Не нравится">
         <span class="btn btn-primary">Ненра</span>
-        <span data-count="dislike">{{ like_obj.votes.dislikes.count }}</span>
+        <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
     </li>
     </ul>
 
