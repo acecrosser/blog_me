@@ -1,5 +1,4 @@
 import json
-
 from django.http import HttpResponse
 from django.views import View
 from django.contrib.contenttypes.models import ContentType

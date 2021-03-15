@@ -25,8 +25,15 @@ h2 {
     font-family: 'Roboto Slab', serif;
 }
 
+.section {
+    padding: 5px; /* Поля вокруг текста */
+    width: 300px; /* Ширина слоя */
+    float: left; /* Обтекание по правому краю */
+    font-family: 'Roboto Slab', serif;
+}
+
 .center {
-    width: 1200px; /* Ширина элемента в пикселах */
+    width: 1325px; /* Ширина элемента в пикселах */
     padding: 10px; /* Поля вокруг текста */
     margin: auto; /* Выравниваем по центру */
 }

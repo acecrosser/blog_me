@@ -49,7 +49,7 @@
                     <img src="{% static 'images/blogme.png' %}" alt="" class="logo"><br>
                     <a href="{% url 'blog:index_page' %}">Главная</a><br>
                     <a href="{% url 'blog:rub' %}">Рубрики</a><br>
-                    <a href="{% url 'about:index_about' %}">Блогми</a><br>
+                    <a href="{% url 'about:index_about' user %}">Блогми</a><br>
                     {% if user.is_authenticated %}
                         <br><a href="{% url 'blog:add_post' %}">Добавить</a><br>
                     {% else %}
@@ -59,6 +59,11 @@
 
         <div class="content">
             {% block content %}
+            {% endblock %}
+        </div>
+
+        <div class="section">
+            {% block section %}
             {% endblock %}
         </div>
 

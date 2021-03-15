@@ -3,6 +3,7 @@ from django.forms.widgets import Select, Textarea
 from .models import BlogPost, PostComment
 from captcha.fields import CaptchaField
 
+
 class PostForm(ModelForm):
 
     class Meta:

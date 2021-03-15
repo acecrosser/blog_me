@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import index
+from .views import UserProfileDetailPage
 
 app_name = 'about'
 urlpatterns = [
-    path('', index, name='index_about')
+    path('<str:slug>/', UserProfileDetailPage.as_view(), name='index_about')
 ]
