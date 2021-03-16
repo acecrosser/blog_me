@@ -8,7 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
@@ -42,20 +41,20 @@
         });
     </script>
 
-    <div class="center">
-
-        <div class="menu">
+       <div class="menu">
                 <center>
                     <img src="{% static 'images/blogme.png' %}" alt="" class="logo"><br>
-                    <a href="{% url 'blog:index_page' %}">Главная</a><br>
-                    <a href="{% url 'blog:rub' %}">Рубрики</a><br>
-                    <a href="{% url 'about:index_about' 'acecrosser' %}">Блогми</a><br>
+                    <b><i>BLOG ME</i></b><br><br>
+                    <a href="{% url 'blog:index_page' %}">БЛОГ</a><br>
+                    <a href="{% url 'blog:rub' %}">РУБРИКИ</a><br>
+                    <a href="{% url 'about:index_about' 'acecrosser' %}">ОБ АВТОРЕ</a><br>
                     {% if user.is_authenticated %}
                         <br><a href="{% url 'blog:add_post' %}">Добавить</a><br>
                         <a href="/admin">Админка</a><br>
                     {% else %}
                     {% endif %}
                 </center>
+                <div id="footer">© blogme {% year %}</div>
         </div>
 
         <div class="content">
@@ -67,10 +66,6 @@
             {% block section %}
             {% endblock %}
         </div>
-
-    </div>
-
-    <div id="footer">© blogme {% year %}</div>
 
 </body>
 </html>

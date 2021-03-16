@@ -12,24 +12,27 @@ h2 {
 }
 
 .menu {
-    padding: 5px; /* Поля вокруг текста */
+    position: fixed;
+    padding: 15px; /* Поля вокруг текста */
     float: left; /* Обтекание по правому краю */
-    width: 200px; /* Ширина слоя */
+    width: 300px; /* Ширина слоя */
+    height: 100%;
     font-size: 15px;
-    font-family: 'Comfortaa', cursive;
+    background: #FFFAFA;
 }
 .content {
+    position: absolute;
+    top: 20px;
+    left: 320px;
     padding: 5px; /* Поля вокруг текста */
     width: 800px; /* Ширина слоя */
-    float: left; /* Обтекание по правому краю */
-    font-family: 'Roboto Slab', serif;
+    border: 10px;
 }
 
 .section {
     padding: 5px; /* Поля вокруг текста */
     width: 300px; /* Ширина слоя */
     float: right; /* Обтекание по правому краю */
-    font-family: 'Roboto Slab', serif;
 }
 
 .center {
@@ -46,10 +49,10 @@ h2 {
     position: fixed;
     left:0; bottom: 0;
     padding: 10px;
-    width: 100%;
     font-family: 'Comfortaa', cursive;
     font-size: 12px;
     text-align: center;
+    width: 300px
 }
 
 
