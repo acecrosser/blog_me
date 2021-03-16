@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django.forms.widgets import Select, Textarea
-from .models import BlogPost, PostComment
+from .models import BlogPost, PostComment, BlogRubric
 from captcha.fields import CaptchaField
 
 
@@ -29,3 +29,10 @@ class CommentForm(ModelForm):
         widgets = {
             'comment': Textarea(attrs={'cols': 80, 'rows': 3}),
         }
+
+
+class RubricForm(ModelForm):
+
+    class Meta:
+        model = BlogRubric
+        fields = ('rubric_name', )

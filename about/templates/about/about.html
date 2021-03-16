@@ -7,6 +7,24 @@
     {{ profile.about }}<br>
     {{ profile.mail }}
 {% endblock %}
+
 {% block section %}
-Ась карась
+    {% for rub in rubric  %}
+        {{ rub.rubric_name }} - {{ rub.post.count }} <br>
+    {% endfor %}
+    <br>
+    Общее количестсво созданых постов: {{ posts.count }}
+    <br>
+    Комментарии: {{ comments.count }}
+
+    {% if user.is_authenticated %}
+    <form method="post">
+    {% csrf_token %}
+    <table>
+        {{ rubric_form }}
+    </table>
+    <input type="submit" value="Добавить">
+    </form>
+    {% else %}
+    {% endif %}
 {% endblock %}
