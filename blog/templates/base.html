@@ -12,34 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <title>{% block title %}{% endblock %}</title>
+    <script src="{% static 'js/ajax.js' %}"></script>
+    <title>{% block title %}Блог{% endblock %} | blog me</title>
 </head>
 <body>
-
-     <script>
-        function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-
-        // Настройка AJAX
-        $(function() {
-            $.ajaxSetup({
-                headers: { "X-CSRFToken": getCookie("csrftoken") }
-            });
-        });
-    </script>
 
        <div class="menu">
                 <center>

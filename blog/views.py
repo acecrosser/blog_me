@@ -11,7 +11,7 @@ from .forms import PostForm, CommentForm
 
 class IndexPage(ListView):
 
-    paginate_by = 3
+    paginate_by = 5
     model = BlogPost
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
@@ -50,7 +50,7 @@ class DetailPost(FormView, DetailView):
 
 class TagPosts(ListView):
 
-    paginate_by = 3
+    paginate_by = 5
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
 
@@ -62,7 +62,7 @@ class TagPosts(ListView):
 
 class RubricPage(ListView):
 
-    paginate_by = 3
+    paginate_by = 5
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
 

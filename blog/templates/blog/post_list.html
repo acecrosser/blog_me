@@ -6,13 +6,19 @@
     {% for post in posts %}
         <a href="{% url 'blog:detail' post.rubric_name.slug post.slug %}">
             <h2>{{ post.title }}</h2></a>
-        {{ post.update|date }} <br>
+        <rt style="color: #D3D3D3">{{ post.update|date }} </rt>
         {% for tag in post.tags.all %}
-            <a href="{% url 'blog:tags' tag %}">{{ tag }}</a>
+            <a href="{% url 'blog:tags' tag %}">
+                <span class="badge rounded-pill bg-light text-dark">{{ tag }}</span>
+            </a>
         {% endfor %}
-        <br>{{ post.body|markdown|truncatewords:'100' }} <br>
-        <a href="{% url 'blog:rubric' post.rubric_name.slug %}"> {{ post.rubric_name }}</a> <br>
-        {{ post.author }} - количество комментарий: {{ post.comment.count }}<br><br>
+
+        <div class="mt-2 container">
+            {{ post.body|markdown|truncatewords:'100' }}
+            <div class="offset-8">
+                 <button type="button" class="mb-5 btn btn-outline-dark">Количество комментарий: {{ post.comment.count }}</button>
+             </div>
+        </div>
     {% endfor %}
 
     {% if page_obj.has_previous %}
@@ -24,4 +30,5 @@
         <a href="?page={{ page_obj.next_page_number }}">след.</a>
         <a href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
     {% endif %}
+
 {% endblock %}

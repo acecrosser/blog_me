@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from django.forms.widgets import Select, Textarea
+from django.forms.widgets import Select, Textarea, TextInput, Input
 from .models import BlogPost, PostComment, BlogRubric
 from captcha.fields import CaptchaField
 
@@ -27,7 +27,8 @@ class CommentForm(ModelForm):
         model = PostComment
         fields = {'author', 'comment'}
         widgets = {
-            'comment': Textarea(attrs={'cols': 80, 'rows': 3}),
+            'author': Input(attrs={'class': 'form-control'}),
+            'comment': Textarea(attrs={'cols': 80, 'rows': 3, 'class': 'form-control'}),
         }
 
 
