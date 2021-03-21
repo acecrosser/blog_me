@@ -8,7 +8,9 @@
     {{ profile.mail }}
 {% endblock %}
 
+
 {% block section %}
+<div class="section">
     {% for rub in rubric  %}
         {{ rub.rubric_name }} - {{ rub.post.count }} <br>
     {% endfor %}
@@ -16,15 +18,15 @@
     Общее количестсво созданых постов: {{ posts.count }}
     <br>
     Комментарии: {{ comments.count }}
-
+    <br><br>
     {% if user.is_authenticated %}
     <form method="post">
-    {% csrf_token %}
-    <table>
-        {{ rubric_form }}
-    </table>
-    <input type="submit" value="Добавить">
+        {% csrf_token %}
+        <label class="form-label">Добавить рубрику:</label>
+            {{ rubric_form.rubric_name }}
+        <button type="submit" class="btn btn-warning mt-3">Добавить</button>
     </form>
     {% else %}
     {% endif %}
+</div>
 {% endblock %}

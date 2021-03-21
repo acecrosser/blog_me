@@ -14,8 +14,10 @@ class PostForm(ModelForm):
             'body': 'Текст записи'
         }
         widgets = {
-            'body': Textarea(attrs={'cols': 80, 'rows': 20}),
-            'rubric_name': Select(attrs={'size': 5})
+            'title': TextInput(attrs={'class': 'form-control'}),
+            'body': Textarea(attrs={'cols': 80, 'rows': 15, 'class': 'form-control'}),
+            'tags': TextInput(attrs={'class': 'form-control'}),
+            'rubric_name': Select(attrs={'size': 5, 'class': 'form-control'})
         }
 
 
@@ -37,3 +39,6 @@ class RubricForm(ModelForm):
     class Meta:
         model = BlogRubric
         fields = ('rubric_name', )
+        widgets = {
+            'rubric_name': TextInput(attrs={'class': 'form-control'})
+        }

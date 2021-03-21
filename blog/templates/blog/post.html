@@ -9,7 +9,9 @@
     <h1>{{ post.title }}</h1>
     <p class="fs-6" style="color: #D3D3D3">{{ post.update|date }}</p>
     {% for tag in post.tags.all %}
-        <span class="badge rounded-pill bg-info text-dark">{{ tag }}</span>
+        <a href="{% url 'blog:tags' tag %}">
+            <span class="badge rounded-pill bg-info text-dark">{{ tag }}</span>
+        </a>
     {% endfor %}
     <div class="mt-2 container">
     {{ post.body|markdown }}
