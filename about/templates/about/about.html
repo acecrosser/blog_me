@@ -1,11 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-     <h1>Дарова блогер йопта</h1>
-    {{ profile.status }}<br>
-    {{ profile.author }}<br>
-    {{ profile.about }}<br>
-    {{ profile.mail }}
+    <h3>{{ profile.author.get_full_name }}</h3>
+    <span class="badge bg-light text-dark">Статус: </span>
+    <span class="badge bg-warning text-dark">{{ profile.status }}</span><br>
+    <p class="fs-3 mt-2">Об авторе:</p>
+    <div class="mt-2 container">
+        {{ profile.about }}
+    </div>
+
+    <p class="fs-5 mt-3">Контакты:</p>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th scope="row">Github:</th>
+            <td>{{ profile.github }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Telegram:</th>
+            <td>{{ profile.telegram }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Mail:</th>
+            <td>{{ profile.mail }}</td>
+        </tr>
+        </tbody>
+    </table>
+
 {% endblock %}
 
 

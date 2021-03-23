@@ -81,7 +81,7 @@ class RubricPage(ListView):
 class RubricIndexPage(ListView):
 
     template_name = 'blog/rubrics.html'
-    context_object_name = 'posts'
+    context_object_name = 'rubrics'
     queryset = BlogRubric.objects.filter()
 
 
@@ -126,7 +126,9 @@ def add_post(request):
             new_post.author = request.user
             new_post.save()
             post = BlogPost.objects.get(title=new_post)
-            post.tags.add(request.POST['tags'])
+            tags = request.POST['tags'].split()
+            for tag in tags:
+                new_post.tags.add(tag)
             return redirect('blog:detail', post.rubric_name.slug, post.slug)
         return render(request, 'blog/form_post.html', {'form': form})
     return render(request, 'blog/form_post.html', {'form': form})
