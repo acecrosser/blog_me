@@ -70,19 +70,12 @@ class RubricPage(ListView):
         slug = BlogRubric.objects.get(slug=self.kwargs['rubric_slug'])
         return BlogPost.objects.filter(rubric_name=slug.id)
 
-    def get_context_data(self, **kwargs):
-        slug = BlogRubric.objects.get(slug=self.kwargs['rubric_slug'])
-        context = super().get_context_data(**kwargs)
-        context['rubrics'] = BlogRubric.objects.all()
-        context['current_rubrics'] = BlogRubric.objects.get(pk=slug.id)
-        return context
-
 
 class RubricIndexPage(ListView):
 
     template_name = 'blog/rubrics.html'
-    context_object_name = 'rubrics'
-    queryset = BlogRubric.objects.filter()
+    context_object_name = 'post'
+    queryset = BlogPost.objects.filter()
 
 
 class VoteView(View):

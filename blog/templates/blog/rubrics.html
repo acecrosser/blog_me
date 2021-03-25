@@ -2,8 +2,14 @@
 
 {% block content %}
 
-    {% for post in rubrics %}
-    <a href="{% url 'blog:rubric' post.slug %}"> {{ post.rubric_name }}: {{ post.post.count }}</a><br>
+    {% for rubric in post %}
+        {% ifchanged rubric.rubric_name %}
+            <h4 class="mt-3"><a href="{% url 'blog:rubric' rubric.rubric_name.slug %}"> {{ rubric.rubric_name }}:</a></h4>
+        {% endifchanged %}
+    <div class="container">
+        <li><a href="{% url 'blog:detail' rubric.rubric_name.slug rubric.slug %}">{{ rubric.title }}</a></li>
+    </div>
     {% endfor %}
+
 
 {% endblock %}
