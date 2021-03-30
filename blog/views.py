@@ -1,5 +1,5 @@
 import json
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.views import View
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect, reverse
@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
 from .models import BlogPost, BlogRubric, LikeDislike
 from .forms import PostForm, CommentForm
+import secrets
 
 
 class IndexPage(ListView):
@@ -87,7 +88,7 @@ class VoteView(View):
         try:
             like_dislike = LikeDislike.objects.get(
                 content_type=ContentType.objects.get_for_model(obj),
-                object_id=obj.id, user=request.user)
+                object_id=obj.id, id_session=request.COOKIES['sessionid'])
             if like_dislike.vote is not self.vote_type:
                 like_dislike = self.vote_type
                 like_dislike.save(update_fields=['vote'])
@@ -96,7 +97,7 @@ class VoteView(View):
                 like_dislike.delete()
                 result = False
         except LikeDislike.DoesNotExist:
-            obj.votes.create(user=request.user, vote=self.vote_type)
+            obj.votes.create(id_session=request.COOKIES['sessionid'], vote=self.vote_type)
             result = True
 
         return HttpResponse(

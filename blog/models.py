@@ -93,7 +93,8 @@ class LikeDislike(models.Model):
     }
 
     vote = models.SmallIntegerField(verbose_name='Голос', choices=VOTES)
-    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE, blank=True)
+    id_session = models.CharField(max_length=50)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()

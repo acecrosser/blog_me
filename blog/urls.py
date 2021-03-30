@@ -14,13 +14,4 @@ urlpatterns = [
     path('tags/<str:tag_slug>', TagPosts.as_view(), name='tags'),
     path('rubrics/<str:rubric_slug>', RubricPage.as_view(), name='rubric'),
     path('rubrics/<str:rubric_slug>/<str:slug>', DetailPost.as_view(), name='detail'),
-    url(r'^blogpost/(?P<pk>\d+)/like/$', login_required(VoteView.as_view(model=BlogPost, vote_type=LikeDislike.LIKE)),
-        name='blogpost_like'),
-    url(r'^blogpost/(?P<pk>\d+)/dislike/$', login_required(VoteView.as_view(model=BlogPost, vote_type=LikeDislike.DISLIKE)),
-        name='blogpost_dislike'),
-    url(r'^postcomment/(?P<pk>\d+)/like/$', login_required(VoteView.as_view(model=PostComment, vote_type=LikeDislike.LIKE)),
-        name='blogpost_like'),
-    url(r'^postcomment/(?P<pk>\d+)/dislike/$', login_required(VoteView.as_view(model=PostComment, vote_type=LikeDislike.DISLIKE)),
-        name='blogpost_dislike')
-
 ]

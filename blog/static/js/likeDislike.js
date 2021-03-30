@@ -20,7 +20,7 @@ function like()
         return false;
     }
 
-    function dislike()
+function dislike()
     {
         var dislike = $(this);
         var type = dislike.data('type');
