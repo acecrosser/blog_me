@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('', include('blog.urls'), name='blog'),
@@ -7,4 +9,5 @@ urlpatterns = [
     path('about/', include('about.urls'), name='about'),
     path('captcha/', include('captcha.urls')),
     path('admin/', admin.site.urls),
+    url(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
 ]

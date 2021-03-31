@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+{% block title %}Об авторе | {% endblock %}
+
+
 {% block content %}
     <h3>{{ profile.author.get_full_name }}</h3>
     <span class="badge bg-light text-dark">Статус: </span>
