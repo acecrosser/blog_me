@@ -11,7 +11,7 @@ class UserProfile(models.Model):
     github = models.CharField(max_length=100, blank=True)
     telegram = models.CharField(max_length=100, blank=True)
     status = models.CharField(max_length=115)
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(blank=True, upload_to='../blog/static/images/')
     slug = models.SlugField(max_length=100, blank=True)
 
     class Meta:

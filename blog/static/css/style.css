@@ -55,9 +55,10 @@ h2 {
 }
 
 .social_link {
-    position: relative;
-    top: 200px;
+    position: fixed;
+    top: 80%;
     width: 200px;
+    left: 50px;
     display: grid;
     grid-template-columns: repeat(3, 33%);
 }
