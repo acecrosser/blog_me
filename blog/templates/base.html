@@ -14,14 +14,14 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="{% static 'js/ajax.js' %}"></script>
-    <title>{% block title %}{% endblock %}Очередной блог Джуна</title>
+    <title>{% block title %}{% endblock %}Авторский блог - Путь Джуна</title>
 </head>
 <body>
 
        <div class="menu">
                 <center>
                     <img src="{% static 'images/blogme.png' %}" alt="" class="logo"><br>
-                    <h4><i>Очередной блог <br>Джуна</i></h4><br><br>
+                    <p><i>Simple is better<br>than complex</i></p><br><br>
                     <a href="{% url 'blog:index_page' %}">БЛОГ</a><br>
                     <a href="{% url 'blog:rub' %}">РУБРИКИ</a><br>
                     <a href="{% url 'blog:links' %}">ССЫЛКИ</a><br>
