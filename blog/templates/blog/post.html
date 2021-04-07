@@ -41,7 +41,7 @@
             <span data-count="dislike">{{ post.votes.dislikes.count }}</span>
         </div>
         <div class="offset-md-7 col">
-            <p>Рубрика - <a href="{% url 'blog:rubric' post.rubric_name.slug %}">{{ post.rubric_name }}</a></p>
+            <p><h6>Рубрика - <a href="{% url 'blog:rubric' post.rubric_name.slug %}">{{ post.rubric_name }}</a></h6></p>
         </div>
     </div>
 
