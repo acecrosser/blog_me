@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Ссылки | {% endblock %}
+
+{% block content %}
+
+    {% for link in links %}
+        {% ifchanged link.rubric_name %}
+            <h4 class="mt-3"><a href="{% url 'blog:rubric' link.rubric_name.slug %}" target="_blank"> {{ link.rubric_name }}:</a></h4>
+        {% endifchanged %}
+    <div class="container">
+        <li><a href="{{ link.link }}">{{ link.title }}</a></li>
+    </div>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            <br>
+            <label class="form-label">Добавить ссылку:</label>
+                {{ link_form.title }}<br>
+                {{ link_form.link }}<br>
+                {{ link_form.rubric_name }}
+            <button type="submit" class="btn btn-warning mt-3">Добавить</button>
+        </form>
+    {% else %}
+    {% endif %}
+
+{% endblock %}

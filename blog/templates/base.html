@@ -24,6 +24,7 @@
                     <h4><i>Очередной блог <br>Джуна</i></h4><br><br>
                     <a href="{% url 'blog:index_page' %}">БЛОГ</a><br>
                     <a href="{% url 'blog:rub' %}">РУБРИКИ</a><br>
+                    <a href="{% url 'blog:links' %}">ССЫЛКИ</a><br>
                     <a href="{% url 'about:index_about' 'acecrosser' %}">ОБ АВТОРЕ</a><br>
                     {% if user.is_authenticated %}
                         <br><a href="{% url 'blog:add_post' %}">СОЗДАТЬ</a><br>

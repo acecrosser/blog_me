@@ -5,8 +5,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormView
-from .models import BlogPost, BlogRubric, LikeDislike
-from .forms import PostForm, CommentForm
+from .models import BlogPost, BlogRubric, LikeDislike, BlogLinks
+from .forms import PostForm, CommentForm, LinksForm
 import secrets
 
 
@@ -77,6 +77,27 @@ class RubricIndexPage(ListView):
     template_name = 'blog/rubrics.html'
     context_object_name = 'post'
     queryset = BlogPost.objects.filter()
+
+
+class LinksIndexPage(FormView, ListView):
+
+    template_name = 'blog/links.html'
+    context_object_name = 'links'
+    queryset = BlogLinks.objects.all()
+    form_class = LinksForm
+
+    def get_context_data(self, **kwargs):
+        context = super(LinksIndexPage, self).get_context_data(**kwargs)
+        context['link_form'] = self.get_form()
+        return context
+
+    def form_valid(self, form):
+        link = form.save(commit=False)
+        link.save()
+        return super().form_valid(link)
+
+    def get_success_url(self):
+        return reverse('blog:links')
 
 
 class VoteView(View):

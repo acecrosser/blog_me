@@ -46,6 +46,13 @@ class BlogRubric(models.Model):
         verbose_name_plural = 'Рубрики'
 
 
+class BlogLinks(models.Model):
+
+    title = models.CharField(max_length=150)
+    link = models.CharField(max_length=150)
+    rubric_name = models.ForeignKey('BlogRubric', on_delete=models.CASCADE, related_name='links')
+
+
 class UserProfile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
