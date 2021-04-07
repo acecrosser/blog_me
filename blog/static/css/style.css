@@ -26,7 +26,6 @@ h2 {
 
 .menu {
     position: fixed;
-    font-family: 'PT Serif', serif;
     padding: 15px; /* Поля вокруг текста */
     float: left; /* Обтекание по правому краю */
     width: 300px; /* Ширина слоя */
