@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load selfilters %}
 
 {% block title %}Об авторе | {% endblock %}
 
@@ -10,7 +11,7 @@
     <span class="badge bg-warning text-dark">{{ profile.status }}</span><br>
     <p class="fs-3 mt-2">Об авторе:</p>
     <div class="mt-2 container">
-        {{ profile.about }}
+        {{ profile.about|markdown }}
     </div>
 
     <div class="row mt-4 justify-content-md-center">
