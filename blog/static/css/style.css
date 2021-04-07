@@ -35,7 +35,7 @@ h2 {
 }
 .content {
     position: absolute;
-    font-family: 'PT Serif', serif;
+    font-family: 19px/1.5 'PT Serif', serif;
     top: 20px;
     left: 320px;
     padding: 5px; /* Поля вокруг текста */
