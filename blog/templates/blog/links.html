@@ -6,10 +6,10 @@
 
     {% for link in links %}
         {% ifchanged link.rubric_name %}
-            <h4 class="mt-3"><a href="{% url 'blog:rubric' link.rubric_name.slug %}" target="_blank"> {{ link.rubric_name }}:</a></h4>
+            <h4 class="mt-3"><a href="{% url 'blog:rubric' link.rubric_name.slug %}"> {{ link.rubric_name }}:</a></h4>
         {% endifchanged %}
     <div class="container">
-        <li><a href="{{ link.link }}">{{ link.title }}</a></li>
+        <li><a href="{{ link.link }}" target="_blank">{{ link.title }}</a></li>
     </div>
     {% endfor %}
 

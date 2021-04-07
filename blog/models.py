@@ -52,6 +52,11 @@ class BlogLinks(models.Model):
     link = models.CharField(max_length=150)
     rubric_name = models.ForeignKey('BlogRubric', on_delete=models.CASCADE, related_name='links')
 
+    class Meta:
+        ordering = ('-rubric_name', )
+        verbose_name = 'Ссылки'
+        verbose_name_plural = 'Ссылки'
+
 
 class UserProfile(models.Model):
 
